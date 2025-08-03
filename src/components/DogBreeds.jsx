@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import DogCard from "./DogCard";
 const dogBreedApiUrl = import.meta.env.VITE_SERVER_DOGBREED;
 const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
+import styles from "./DogBreeds.module.css";
 
 const DogBreeds = () => {
   const [breeds, setBreeds] = useState([]);
@@ -37,22 +38,25 @@ const DogBreeds = () => {
   }, [breeds]);
 
   return (
-    <div className="list-container">
+    <div className={styles.listContainer}>
       {/* {JSON.stringify(breeds)} */}
-
-      {breeds.map((breed) => (
-        <DogCard
-          key={breed.id}
-          id={breed.id}
-          name={breed.name}
-          life_span={breed.life_span}
-          image={{
-            url: breed.reference_image_id
-              ? `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
-              : null,
-          }}
-        />
-      ))}
+      <ul>
+        {breeds.map((breed) => (
+          <li key={breed.id}>
+            <DogCard
+              key={breed.id}
+              id={breed.id}
+              name={breed.name}
+              life_span={breed.life_span}
+              image={{
+                url: breed.reference_image_id
+                  ? `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+                  : null,
+              }}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

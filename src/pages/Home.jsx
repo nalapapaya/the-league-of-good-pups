@@ -1,11 +1,11 @@
 //landing page
 import React from "react";
 import DogBreeds from "../components/DogBreeds";
-
+import styles from "./Home.module.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="container">
         <DogBreeds/>
     </div>
   );

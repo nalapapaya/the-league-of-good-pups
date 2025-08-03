@@ -1,0 +1,29 @@
+.listContainer {
+  font-family: 'Poppins', sans-serif;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+    flex-wrap: wrap;
+    height: 20rem;
+    width: 17rem;
+    border-radius: 20px;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    padding-top: 1rem;
+}
+
+h3 {
+    font-size: 20px;
+}
