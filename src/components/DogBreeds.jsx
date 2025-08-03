@@ -1,4 +1,6 @@
+//list of dog cards
 import React, { useState, useEffect } from "react";
+import DogCard from "./DogCard";
 const dogBreedApiUrl = import.meta.env.VITE_SERVER_DOGBREED;
 const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
 
@@ -7,6 +9,8 @@ const DogBreeds = () => {
   const [error, setError] = useState(null);
 
   const getData = async () => {
+    console.log("Fetching from:", dogBreedApiUrl + "v1/breeds");
+    console.log("Using API Key:", dogBreedKey);
     try {
       const res = await fetch(dogBreedApiUrl + "v1/breeds", {
         headers: {
@@ -16,6 +20,7 @@ const DogBreeds = () => {
 
       if (res.ok) {
         const data = await res.json();
+        console.log("Fetched data:", data);
         setBreeds(data);
       }
     } catch (error) {
@@ -26,9 +31,30 @@ const DogBreeds = () => {
   useEffect(() => {
     getData();
   }, []);
-  return <div className="list-container">
-    {/* {JSON.stringify(breeds)} */}
-    </div>;
+
+  useEffect(() => {
+    console.log("BREEDS:", breeds);
+  }, [breeds]);
+
+  return (
+    <div className="list-container">
+      {/* {JSON.stringify(breeds)} */}
+
+      {breeds.map((breed) => (
+        <DogCard
+          key={breed.id}
+          id={breed.id}
+          name={breed.name}
+          life_span={breed.life_span}
+          image={{
+            url: breed.reference_image_id
+              ? `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+              : null,
+          }}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default DogBreeds;

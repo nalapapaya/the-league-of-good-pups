@@ -1,3 +1,4 @@
+//random dog fact component
 import React, { useState, useEffect } from "react";
 const dogFactsURL = import.meta.env.VITE_SERVER_DOGFACTS;
 
