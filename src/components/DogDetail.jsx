@@ -4,8 +4,12 @@ import { useParams, Link } from "react-router-dom";
 const dogBreedApiUrl = import.meta.env.VITE_SERVER_DOGBREED;
 const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
 import styles from "./DogDetail.module.css";
+import { addToTeam } from "../api/airtable";
 
-const DogDetail = () => {
+const teamURL = import.meta.env.VITE_AIRTABLE_TEAM_URL;
+const apiKey = import.meta.env.VITE_AIRTABLE_API_KEY;
+
+const DogDetail = ({ team, setTeam }) => {
   const { id } = useParams();
   const [breed, setBreed] = useState(null);
   const [error, setError] = useState(null);
@@ -33,6 +37,17 @@ const DogDetail = () => {
   if (!breed) {
     return <div>Loading...</div>;
   } // stop render until breed available
+
+  // add to team
+  const handleAddToTeam = async () => {
+    try {
+      await addToTeam(breed);
+      console.log(`${breed.name} added to team`);
+    } catch (error) {
+      console.error(error);
+      console.log("failed to add to team");
+    }
+  };
 
   return (
     <div>
@@ -76,6 +91,7 @@ const DogDetail = () => {
             </tr>
           </tbody>
         </table>
+        <button onClick={handleAddToTeam}>Add to Team</button>
       </div>
     </div>
   );

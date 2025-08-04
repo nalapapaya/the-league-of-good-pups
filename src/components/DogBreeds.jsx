@@ -10,8 +10,8 @@ const DogBreeds = () => {
   const [error, setError] = useState(null);
 
   const getData = async () => {
-    console.log("Fetching from:", dogBreedApiUrl + "v1/breeds");
-    console.log("Using API Key:", dogBreedKey);
+    // console.log("Fetching from:", dogBreedApiUrl + "v1/breeds");
+    // console.log("Using API Key:", dogBreedKey);
     try {
       const res = await fetch(dogBreedApiUrl + "v1/breeds", {
         headers: {
@@ -21,7 +21,7 @@ const DogBreeds = () => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log("Fetched data:", data);
+        // console.log("Fetched data:", data);
         setBreeds(data);
       }
     } catch (error) {
@@ -34,7 +34,7 @@ const DogBreeds = () => {
   }, []);
 
   useEffect(() => {
-    console.log("BREEDS:", breeds);
+    // console.log("BREEDS:", breeds);
   }, [breeds]);
 
   return (
