@@ -1,5 +1,30 @@
+const teamURL = import.meta.env.VITE_AIRTABLE_TEAM_URL;
+const apiKey = import.meta.env.VITE_AIRTABLE_API_KEY;
+
+//fetch data from airtable(export function)
+export const getTeam = async () => {
+  const res = await fetch(teamURL, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Airtable GET error ${error}`);
+  }
+  const data = await res.json();
+  return data.records.map((record) => ({
+    airtableId: record.id, //store id
+    ...record.fields, //expand fields to kvp
+  }));
+};
+
 //adding dog to team (export function)
 export const addToTeam = async (breed) => {
+
+  // console.log("Breed object:", breed);
+
   const res = await fetch(teamURL, {
     method: "POST",
     headers: {
@@ -8,10 +33,12 @@ export const addToTeam = async (breed) => {
     },
     body: JSON.stringify({
       fields: {
-        id: breed.id,
+        breed_id: breed.id,
         name: breed.name,
         life_span: breed.life_span,
-        image_url: breed.image_url,
+        image_url: breed.reference_image_id
+  ? `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+  : null,
         weight: breed.weight.metric,
         height: breed.height.metric,
         temperament: breed.temperament,
@@ -27,3 +54,10 @@ export const addToTeam = async (breed) => {
   }
   return await res.json(); //await airtable
 };
+
+//remove from team (export function)
+export const removeFromTeam = async(breed) => {
+  const res = await fetch(teamURL, {
+    method: "DELETE"
+  })
+}

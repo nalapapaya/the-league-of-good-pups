@@ -6,6 +6,7 @@ import TeamView from "./components/TeamView";
 import { useState } from "react";
 
 function App() {
+
   const [team, setTeam] = useState([]);
 
   return (
@@ -17,9 +18,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/breeds/:id"
-            element={<BreedPage team={team} setTeam={setTeam} />}
+            element={<BreedPage team={team} setTeam={setTeam}/>}
           />
-          <Route path="/team" element={<TeamView team={team} />} />
+          <Route path="/team" element={<TeamView team={team} setTeam={setTeam}/>} />
         </Routes>
       </BrowserRouter>
     </div>

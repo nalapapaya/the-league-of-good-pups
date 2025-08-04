@@ -6,8 +6,6 @@ const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
 import styles from "./DogDetail.module.css";
 import { addToTeam } from "../api/airtable";
 
-const teamURL = import.meta.env.VITE_AIRTABLE_TEAM_URL;
-const apiKey = import.meta.env.VITE_AIRTABLE_API_KEY;
 
 const DogDetail = ({ team, setTeam }) => {
   const { id } = useParams();
