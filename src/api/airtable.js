@@ -22,7 +22,6 @@ export const getTeam = async () => {
 
 //adding dog to team (export function)
 export const addToTeam = async (breed) => {
-
   // console.log("Breed object:", breed);
 
   const res = await fetch(teamURL, {
@@ -37,8 +36,8 @@ export const addToTeam = async (breed) => {
         name: breed.name,
         life_span: breed.life_span,
         image_url: breed.reference_image_id
-  ? `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
-  : null,
+          ? `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+          : null,
         weight: breed.weight.metric,
         height: breed.height.metric,
         temperament: breed.temperament,
@@ -56,8 +55,16 @@ export const addToTeam = async (breed) => {
 };
 
 //remove from team (export function)
-export const removeFromTeam = async(breed) => {
-  const res = await fetch(teamURL, {
-    method: "DELETE"
-  })
-}
+export const removeFromTeam = async (airtableId) => {
+  const res = await fetch(`${teamURL}/${airtableId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Airtable DEL error: ${error}`);
+  }
+  return await res.json();
+};

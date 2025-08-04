@@ -2,10 +2,10 @@
 import React from 'react';
 import DogDetail from '../components/DogDetail';
 
-const BreedPage = () => {
+const BreedPage = ({team, setTeam}) => {
     return (
         <div>
-            <DogDetail/>
+            <DogDetail team={team} setTeam={setTeam}/>
         </div>
     );
 };

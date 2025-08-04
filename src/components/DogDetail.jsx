@@ -6,7 +6,6 @@ const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
 import styles from "./DogDetail.module.css";
 import { addToTeam } from "../api/airtable";
 
-
 const DogDetail = ({ team, setTeam }) => {
   const { id } = useParams();
   const [breed, setBreed] = useState(null);
@@ -39,7 +38,11 @@ const DogDetail = ({ team, setTeam }) => {
   // add to team
   const handleAddToTeam = async () => {
     try {
-      await addToTeam(breed);
+      const newDog = await addToTeam(breed); //PUT airtable
+      setTeam((prevState) => [
+        ...prevState,
+        { airtableId: newDog.id, ...newDog.fields },
+      ]);
       console.log(`${breed.name} added to team`);
     } catch (error) {
       console.error(error);
