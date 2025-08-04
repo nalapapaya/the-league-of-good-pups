@@ -5,8 +5,7 @@ const dogBreedApiUrl = import.meta.env.VITE_SERVER_DOGBREED;
 const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
 import styles from "./DogBreeds.module.css";
 
-const DogBreeds = () => {
-  const [breeds, setBreeds] = useState([]);
+const DogBreeds = ({ breeds, setBreeds }) => {
   const [error, setError] = useState(null);
 
   const getData = async () => {

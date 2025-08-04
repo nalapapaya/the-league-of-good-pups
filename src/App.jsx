@@ -13,7 +13,6 @@ function App() {
     <div className="container">
       <h1> Dog Breed Explorer</h1><ViewTeamBtn/>
       <hr />
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
