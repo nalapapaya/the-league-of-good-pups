@@ -49,25 +49,46 @@ const TeamView = ({ team, setTeam }) => {
               <img
                 src={breed.image_url}
                 alt={breed.name}
-                className={styles.dogImage}
+                height="150"
+                width="200"
+                style={{
+                  borderRadius: "20px",
+                  objectFit: "cover",
+                  objectPosition: "top",
+                }}
               />
             </div>
-            <section>
-              <div>Name: {breed.name}</div>
-              <StatEditor
-                airtableId={breed.airtableId}
-                existingHeight={breed.height}
-                existingWeight={breed.weight}
-                setTeam={setTeam}
-              />
-              <div>Lifespan: {breed.life_span}</div>
+            <section className={styles.infoSection}>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Name: </th>
+                    <td>{breed.name}</td> <th>Bred for:</th>
+                    <td>{breed.bred_for || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <th>Lifespan:</th> <td>{breed.life_span}</td>
+                    <th className={styles.breedGroup}>Breed Group: </th>
+                    <td>{breed.breed_group || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <th>Origin:</th>
+                    <td colSpan="3">{breed.origin || "Not available"}</td>
+                  </tr>
+                  <tr>
+                    <th>Temperament: </th>{" "}
+                    <td colSpan="3">{breed.temperament}</td>
+                  </tr>
+                </tbody>
+              </table>
             </section>
-            <section>
-              <div>Temperament: {breed.temperament}</div>
-              <div>Bred for: {breed.bred_for || "Not available"}</div>
-              <div>Breed Group: {breed.breed_group || "Not available"}</div>
-              <div>Origin: {breed.origin || "Not available"}</div>
-            </section>
+            <StatEditor
+              airtableId={breed.airtableId}
+              existingHeight={breed.height}
+              existingWeight={breed.weight}
+              setTeam={setTeam}
+            />
+
             <button onClick={() => handleRemove(breed.airtableId)}>
               Remove
             </button>

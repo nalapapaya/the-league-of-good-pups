@@ -11,13 +11,13 @@ const DogCard = (props) => {
 
   return (
     <div className="dog-card">
-      {props.image?.url ? (
+      {props.image?.url ? ( //checks if img exists before accessing url
         <img
           src={props.image.url}
           alt={props.name}
           height="150"
           width="200"
-          style={{ borderRadius: "20px" }}
+          style={{ borderRadius: "20px", objectFit: "cover", objectPosition: "top"}}
         />
       ) : (
         <div style={{ height: "150px", width: "200px", background: "#eee" }}>

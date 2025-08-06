@@ -8,20 +8,18 @@ h2 {
   flex-direction: column;
 }
 
-.dogImage {
-  height: 8rem;
-}
 
 .teamContainer ul {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .teamContainer ul li {
   height: 20rem;
-  width: 42rem;
+  /* width: 42rem; */
+  width: 52rem;
   text-align: left;
   display: flex;
   justify-content: center;
@@ -30,6 +28,7 @@ h2 {
   padding: 0;
   margin: 0;
   row-gap: 0;
+  padding-left: 10px;
 }
 
 .backToHomeBtn {
@@ -40,3 +39,33 @@ h2 {
   width: 6.5rem;
   text-decoration: none;
 }
+
+th,
+td {
+  font-size: 16px;
+  padding-bottom: 2px;
+}
+
+th {
+  width: 5rem;
+}
+td {
+  width: 10rem;
+}
+
+.breedGroup {
+  width: 7rem;
+}
+
+/* .lifeSpan {
+  margin-bottom: 2px;
+} */
+
+/* .infoSection, .infoSection2{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: auto;
+  word-wrap: break-word;
+  white-space: normal;
+} */

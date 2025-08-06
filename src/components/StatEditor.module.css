@@ -1,3 +1,23 @@
-input {
+.statContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: baseline;
+}
+
+.inputWrapper {
+    display: flex;
+    gap:5px;
+}
+
+.editInput {
     width: 3rem;
+    height: 1rem;
+    font-size: 16px;
+}
+
+.editBtn {
+    width: 4rem;
+    height: 30px;
+    font-size: 16px;
 }
