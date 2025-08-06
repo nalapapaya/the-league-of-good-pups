@@ -5,6 +5,7 @@ const dogBreedApiUrl = import.meta.env.VITE_SERVER_DOGBREED;
 const dogBreedKey = import.meta.env.VITE_DOGBREED_API_KEY;
 import styles from "./DogDetail.module.css";
 import { addToTeam } from "../api/airtable";
+import Loading from "../assets/Loading";
 
 const DogDetail = ({ team, setTeam }) => {
   const { id } = useParams();
@@ -32,7 +33,8 @@ const DogDetail = ({ team, setTeam }) => {
   }, [id]);
 
   if (!breed) {
-    return <div>Loading...</div>;
+    // return <div>Loading...</div>;
+    return <Loading/>
   } // stop render until breed available
 
   // add to team
@@ -43,17 +45,20 @@ const DogDetail = ({ team, setTeam }) => {
         ...prevState,
         { airtableId: newDog.id, ...newDog.fields },
       ]);
-      console.log(`${breed.name} added to team`);
+      // console.log(`${breed.name} added to team`);
     } catch (error) {
       console.error(error);
-      console.log("failed to add to team");
+      // console.log("failed to add to team");
     }
   };
 
   return (
-    <div>
-      <Link to="/">Back</Link>
-      <div className={styles.container}>
+    <>
+      <br />{" "}
+      <Link className={styles.backBtn} to="/">
+        Back
+      </Link>
+      <div className={styles.detailContainer}>
         <h2>{breed.name}</h2>
         <img
           src={`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`}
@@ -92,9 +97,11 @@ const DogDetail = ({ team, setTeam }) => {
             </tr>
           </tbody>
         </table>
-        <button onClick={handleAddToTeam}>Add to Team</button>
+        <button className={styles.addToTeamBtn} onClick={handleAddToTeam}>
+          Add to Team
+        </button>
       </div>
-    </div>
+    </>
   );
 };
 

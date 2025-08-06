@@ -1,4 +1,4 @@
-.container {
+.detailContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -23,3 +23,22 @@ tr {
   font-size: 22px;
   padding: 10px;
 }
+
+a,
+.backBtn {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 4px rgb(103, 103, 103);
+}
+
+.backBtn {
+  height: auto;
+  text-decoration: none;
+}
+
+.addToTeamBtn {
+
+}
+
+

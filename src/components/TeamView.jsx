@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { getTeam, removeFromTeam } from "../api/airtable";
 import styles from "./TeamView.module.css";
+import { Link } from "react-router-dom";
+import StatEditor from "./StatEditor";
 
 const TeamView = ({ team, setTeam }) => {
   const [error, setError] = useState(null);
@@ -34,22 +36,42 @@ const TeamView = ({ team, setTeam }) => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.teamContainer}>
+      <Link className={styles.backToHomeBtn} to="/">
+        Back to Home
+      </Link>
       <h2>My Dream Dog Team</h2>
       {error && <div>Error loading team: {error}</div>}
       <ul>
         {team.map((breed) => (
           <li key={breed.airtableId}>
-            <img
-              src={breed.image_url}
-              alt={breed.name}
-              className={styles.dogImage}
-            />
-            <div>{breed.name}</div>
-            <div>{breed.life_span}</div>
+            <div>
+              <img
+                src={breed.image_url}
+                alt={breed.name}
+                className={styles.dogImage}
+              />
+            </div>
+            <section>
+              <div>Name: {breed.name}</div>
+              <div>Weight: {breed.weight} kg</div>
+              <div>Height: {breed.height} cm</div>
+              <div>Lifespan: {breed.life_span}</div>
+            </section>
+            <section>
+              <div>Temperament: {breed.temperament}</div>
+              <div>Bred for: {breed.bred_for}</div>
+              <div>Origin: {breed.origin}</div>
+            </section>
             <button onClick={() => handleRemove(breed.airtableId)}>
               Remove
             </button>
+            <StatEditor
+              airtableId={breed.airtableId}
+              existingHeight={breed.height}
+              existingWeight={breed.weight}
+              exisitingLifespan={breed.life_span}
+            />
           </li>
         ))}
       </ul>

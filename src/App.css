@@ -2,3 +2,33 @@ body {
   padding: 0;
   font-family: 'Poppins', sans-serif;
 }
+
+button {
+  height: 2rem;
+  width: 10rem;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+
+
+.homePage {
+  border-style: none;
+  text-decoration: none;
+  color: black;
+  box-shadow: none;
+  font-size: 6rem;
+  margin-left: 300px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.searchInput {
+  display: flex;
+  justify-content: center;
+  margin-right: 25px;
+}

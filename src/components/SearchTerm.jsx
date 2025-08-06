@@ -11,7 +11,7 @@ const SearchTerm = ({ allBreeds, setFilteredBreeds }) => {
     setFilteredBreeds(filtered);
   },[searchTerm, allBreeds]);
   return (
-    <div>
+    <div className="searchInput">
       <input
         type="text"
         placeholder="Search Breed Name"

@@ -68,3 +68,24 @@ export const removeFromTeam = async (airtableId) => {
   }
   return await res.json();
 };
+
+//update dog stats (export function)
+export const updateDogStats = async (airtableId, fieldsToUpdate) => {
+  const res = await fetch(`${teamURL}/${airtableId}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      fields: fieldsToUpdate,
+    }),
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Airtable PATCH error: ${error}`);
+  }
+
+  return await res.json();
+};

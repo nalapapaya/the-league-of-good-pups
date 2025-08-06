@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./ViewTeamBtn.module.css"
 
 const ViewTeamBtn = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <button onClick={() => navigate("/team")}>View Team</button>
+      <button className="teamBtn" onClick={() => navigate("/team")}>View Team</button>
     </>
   );
 };

@@ -21,7 +21,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="homeContainer">
       <SearchTerm allBreeds={allBreeds} setFilteredBreeds={setFilteredBreeds} />
       <DogBreeds breeds={filteredBreeds} setBreeds={setBreeds} />
     </div>
