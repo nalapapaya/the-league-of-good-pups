@@ -11,6 +11,7 @@ const DogDetail = ({ team, setTeam }) => {
   const { id } = useParams();
   const [breed, setBreed] = useState(null);
   const [error, setError] = useState(null);
+  const [addMsg, setAddMsg] = useState("");
 
   const getData = async () => {
     try {
@@ -34,7 +35,7 @@ const DogDetail = ({ team, setTeam }) => {
 
   if (!breed) {
     // return <div>Loading...</div>;
-    return <Loading/>
+    return <Loading />;
   } // stop render until breed available
 
   // add to team
@@ -45,6 +46,7 @@ const DogDetail = ({ team, setTeam }) => {
         ...prevState,
         { airtableId: newDog.id, ...newDog.fields },
       ]);
+      setAddMsg("Added to team successfully!");
       // console.log(`${breed.name} added to team`);
     } catch (error) {
       console.error(error);
@@ -97,6 +99,7 @@ const DogDetail = ({ team, setTeam }) => {
             </tr>
           </tbody>
         </table>
+        {addMsg && <div>{addMsg}</div>}
         <button className={styles.addToTeamBtn} onClick={handleAddToTeam}>
           Add to Team
         </button>

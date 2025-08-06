@@ -54,8 +54,12 @@ const TeamView = ({ team, setTeam }) => {
             </div>
             <section>
               <div>Name: {breed.name}</div>
-              <div>Weight: {breed.weight} kg</div>
-              <div>Height: {breed.height} cm</div>
+              <StatEditor
+                airtableId={breed.airtableId}
+                existingHeight={breed.height}
+                existingWeight={breed.weight}
+                setTeam={setTeam}
+              />
               <div>Lifespan: {breed.life_span}</div>
             </section>
             <section>
@@ -67,15 +71,10 @@ const TeamView = ({ team, setTeam }) => {
             <button onClick={() => handleRemove(breed.airtableId)}>
               Remove
             </button>
-            <StatEditor
-              airtableId={breed.airtableId}
-              existingHeight={breed.height}
-              existingWeight={breed.weight}
-              exisitingLifespan={breed.life_span}
-            />
           </li>
         ))}
       </ul>
+      {team.length === 0 && <div>No members yet</div>}
     </div>
   );
 };
