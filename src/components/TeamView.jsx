@@ -60,8 +60,9 @@ const TeamView = ({ team, setTeam }) => {
             </section>
             <section>
               <div>Temperament: {breed.temperament}</div>
-              <div>Bred for: {breed.bred_for}</div>
-              <div>Origin: {breed.origin}</div>
+              <div>Bred for: {breed.bred_for || "Not available"}</div>
+              <div>Breed Group: {breed.breed_group || "Not available"}</div>
+              <div>Origin: {breed.origin || "Not available"}</div>
             </section>
             <button onClick={() => handleRemove(breed.airtableId)}>
               Remove
