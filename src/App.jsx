@@ -6,6 +6,7 @@ import { useState } from "react";
 import ViewTeamBtn from "./components/ViewTeamBtn";
 import { Link } from "react-router-dom";
 import TeamPage from "./pages/TeamPage";
+import DogFacts from "./components/DogFacts";
 
 function App() {
   const [team, setTeam] = useState([]);
@@ -19,6 +20,7 @@ function App() {
         <ViewTeamBtn />
       </div>
       <hr />
+      <DogFacts/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

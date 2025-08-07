@@ -1,0 +1,38 @@
+.popupCont {
+  background-color: rgb(238, 191, 162);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 40rem;
+  text-align: center;
+  position: relative;
+  font-size: 20px;
+}
+
+.factBtnCont {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.factH2 {
+  font-size: 4rem;
+  border-radius: 20px;
+}
+
+.factH3 {
+  font-size: 2.5rem;
+  margin: 5px;
+}
+
+.factBtn {
+  margin-top: 1.5rem;
+  padding: 0.5rem, 1rem;
+  font-size: 25px;
+  background-color: rgba(251, 210, 133, 0.575);
+  border: 2px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  height: 3rem;
+  width: 18rem;
+}
