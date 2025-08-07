@@ -13,9 +13,7 @@ const DogFacts = () => {
       const res = await fetch(dogFactsURL + "facts");
       if (res.ok) {
         const data = await res.json();
-        console.log("✅ Setting facts to:", data.data);
         setFacts(data.data); // data.data contains the array of facts
-        console.log("✅ showPopup to true");
         setShowPopup(true);
       } else {
         setError("Failed to fetch dog facts.");
@@ -35,9 +33,6 @@ const DogFacts = () => {
   }, []);
 
   const closePopup = () => setShowPopup(false);
-
-  console.log("🧪 Rendering DogFacts:", { showPopup, facts });
-
   if (error) return <div>Error loading dog facts: {error}</div>;
   if (!showPopup) return null;
 
