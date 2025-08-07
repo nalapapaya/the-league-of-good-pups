@@ -22,7 +22,6 @@ export const getTeam = async () => {
 
 //adding dog to team (export function)
 export const addToTeam = async (breed) => {
-  // console.log("Breed object:", breed);
 
   const res = await fetch(teamURL, {
     method: "POST",

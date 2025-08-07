@@ -23,7 +23,6 @@ const DogFacts = () => {
     getFacts();
   }, []);
   return <div className="container">
-    {/* {JSON.stringify(facts)} */}
     </div>;
 };
 

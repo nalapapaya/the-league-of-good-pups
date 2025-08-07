@@ -6,7 +6,6 @@ import { getTeam } from "../api/airtable";
 import styles from "./TeamPage.module.css"
 
 const TeamPage = ({ team, setTeam }) => {
-  // console.log("TeamPage is rendering");
   return (
     <div className={styles.teamPageCont}>
       <TeamView team={team} setTeam={setTeam} />

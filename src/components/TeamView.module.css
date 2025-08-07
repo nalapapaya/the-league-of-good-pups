@@ -19,7 +19,6 @@ h2 {
 
 .teamContainer ul li {
   height: 15rem;
-  /* width: 42rem; */
   width: 52rem;
   text-align: left;
   display: flex;
@@ -60,16 +59,3 @@ td {
 .breedGroup {
   width: 7rem;
 }
-
-/* .lifeSpan {
-  margin-bottom: 2px;
-} */
-
-/* .infoSection, .infoSection2{
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  height: auto;
-  word-wrap: break-word;
-  white-space: normal;
-} */

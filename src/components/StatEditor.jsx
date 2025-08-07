@@ -2,29 +2,17 @@
 import React, { useState, useEffect } from "react";
 import { updateDogStats, getTeam } from "../api/airtable";
 import styles from "./StatEditor.module.css";
-import {
-  getAvgFromRange,
-//   calBMI,
-//   calOptimalBMI,
-//   calAdjLifespan,
-} from "../functions/calculateBMI";
+import { getAvgFromRange } from "../functions/calculateAvg";
 
 const StatEditor = ({
   airtableId,
   existingWeight,
   existingHeight,
-  // lifeSpanRange,
   setTeam,
-  // setAdjLifespan,
 }) => {
   const [newHeight, setNewHeight] = useState("");
   const [newWeight, setNewWeight] = useState("");
   const [message, setMessage] = useState("");
-
-  // const [optimalBMI, setOptimalBMI] = useState(null);
-  // const [currBMI, setCurrBMI] = useState(null);
-  // const [optimalLife, setOptimalLife] = useState(null);
-  // const [adjLocalLifespan, setAdjLocalLifespan] = useState(null);
 
   // Load average stats from range
   useEffect(() => {
@@ -38,47 +26,6 @@ const StatEditor = ({
     }
   }, [existingHeight, existingWeight]);
 
-  // calculate optimal BMI
-  // useEffect(() => {
-  //   if (existingHeight && existingWeight) {
-  //     const avgHeight = getAvgFromRange(existingHeight);
-  //     const avgWeight = getAvgFromRange(existingWeight);
-  //     const bmi = calOptimalBMI(avgHeight, avgWeight);
-  //     setOptimalBMI(bmi);
-  //   }
-  // }, [existingHeight, existingWeight]);
-
-  // calculate current BMI when user updates stats
-  // useEffect(() => {
-  //   if (newHeight && newWeight) {
-  //     const bmi = calBMI(Number(newHeight), Number(newWeight));
-  //     setCurrBMI(bmi);
-  //   }
-  // }, [newHeight, newWeight]);
-
-  // convert lifespan range to optimal lifespan (use highest)
-  // useEffect(() => {
-  //   if (lifeSpanRange) {
-  //     if (lifeSpanRange.includes(" - ")) {
-  //       const [low, high] = lifeSpanRange
-  //         .split(" - ")
-  //         .map((str) => parseFloat(str));
-  //       setOptimalLife(high);
-  //     } else {
-  //       setOptimalLife(parseFloat(lifeSpanRange));
-  //     }
-  //   }
-  // }, [lifeSpanRange]);
-
-  // calculate adjusted lifespan
-  // useEffect(() => {
-  //   if (optimalBMI && currBMI && optimalLife) {
-  //     const lifespan = calAdjLifespan(optimalBMI, currBMI, optimalLife);
-  //     setAdjLocalLifespan(lifespan);
-  //     setAdjLifespan(lifespan);
-  //   }
-  // }, [optimalBMI, currBMI, optimalLife]);
-
   // save new stats
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -90,30 +37,6 @@ const StatEditor = ({
 
       const teamData = await getTeam();
       setTeam(teamData);
-
-      // const newLifespans = {};
-
-      // teamData.forEach((dog) => {
-      //   const height = getAvgFromRange(dog.height);
-      //   const weight = getAvgFromRange(dog.weight);
-
-      //   const [min, max] = dog.life_span?.split(" - ").map(Number) || [
-      //     null,
-      //     null,
-      //   ];
-      //   const optimalBMI = calOptimalBMI(height, weight);
-      //   const currBMI = calBMI(height, weight);
-      //   const optimalLife = max || 15;
-
-      //   const adj = calAdjLifespan(optimalBMI, currBMI, optimalLife);
-      //   newLifespans[dog.airtableId] = adj;
-      // });
-
-      // setAdjLifespan(newLifespans);
-      // console.log(
-      //   `Updated ${airtableId}: ${newLifespans[airtableId]?.toFixed(1)} years`
-      // );
-
       setMessage("Stats updated successfully!");
     } catch (error) {
       console.error(error);

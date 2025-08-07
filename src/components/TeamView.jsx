@@ -16,7 +16,6 @@ const TeamView = ({ team, setTeam }) => {
         const teamData = await getTeam();
         setTeam(teamData);
       } catch (error) {
-        // console.log("error loading team");
         setError(error.message);
       }
     };
@@ -29,9 +28,7 @@ const TeamView = ({ team, setTeam }) => {
     try {
       await removeFromTeam(airtableId);
       setTeam((prev) => prev.filter((dog) => dog.airtableId !== airtableId));
-      // console.log(`${airtableId} deleted from team.`);
     } catch (error) {
-      // console.log(`error deleting ${airtableId}`);
       setError(error.message);
     }
   };

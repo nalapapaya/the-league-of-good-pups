@@ -47,10 +47,8 @@ const DogDetail = ({ team, setTeam }) => {
         { airtableId: newDog.id, ...newDog.fields },
       ]);
       setAddMsg("Added to team successfully!");
-      // console.log(`${breed.name} added to team`);
     } catch (error) {
       console.error(error);
-      // console.log("failed to add to team");
     }
   };
 
