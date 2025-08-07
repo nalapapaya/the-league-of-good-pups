@@ -41,7 +41,7 @@ const TeamView = ({ team, setTeam }) => {
       <Link className={styles.backToHomeBtn} to="/">
         Back to Home
       </Link>
-      <h2>My Dream Dog Team</h2>
+      <h2>Dream Pack</h2>
       {error && <div>Error loading team: {error}</div>}
       <ul>
         {team.map((breed) => (
@@ -70,7 +70,7 @@ const TeamView = ({ team, setTeam }) => {
                   </tr>
                   <tr>
                     <th>Lifespan:</th>
-                    <td>{adjustedLifespans[breed.airtableId]}</td>
+                    <td>{breed.life_span}</td>
                     <th className={styles.breedGroup}>Breed Group: </th>
                     <td>{breed.breed_group || "Not available"}</td>
                   </tr>

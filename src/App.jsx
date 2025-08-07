@@ -2,10 +2,10 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import BreedPage from "./pages/BreedPage";
-import TeamView from "./components/TeamView";
 import { useState } from "react";
 import ViewTeamBtn from "./components/ViewTeamBtn";
 import { Link } from "react-router-dom";
+import TeamPage from "./pages/TeamPage";
 
 function App() {
   const [team, setTeam] = useState([]);
@@ -27,7 +27,7 @@ function App() {
         />
         <Route
           path="/team"
-          element={<TeamView team={team} setTeam={setTeam} />}
+          element={<TeamPage team={team} setTeam={setTeam} />}
         />
       </Routes>
     </>

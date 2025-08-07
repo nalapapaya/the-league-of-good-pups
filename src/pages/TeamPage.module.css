@@ -1,0 +1,5 @@
+.teamPageCont {
+    display: flex;
+    width: 85rem;
+    gap: 2rem;
+}
