@@ -1,49 +1,88 @@
 //value editor for dog stats
-import React, { use, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { updateDogStats, getTeam } from "../api/airtable";
 import styles from "./StatEditor.module.css";
-
-//modifying addtoteam stats
-const getAvgFromRange = (value) => {
-  if (!value.includes("-")) return value;
-  const [low, high] = value.split(" - ").map(Number);
-  return String(Math.round((low + high) / 2));
-};
+import {
+  getAvgFromRange,
+  calBMI,
+  calOptimalBMI,
+  calAdjLifespan,
+} from "../functions/calculateBMI";
 
 const StatEditor = ({
   airtableId,
   existingWeight,
   existingHeight,
+  lifeSpanRange,
   setTeam,
+  setAdjLifespan,
 }) => {
-  // const [newHeight, setNewHeight] = useState(() => {
-  //   if (!existingHeight) return "";
-  //   else if (!existingHeight.includes("-")) {
-  //   const [low, high] = existingHeight.split("-").map(Number);
-  //   return String(Math.round((high + low) / 2))}
-  //   else return existingHeight;
-  // });
-
-  // const [newWeight, setNewWeight] = useState(() => {
-  //   if (!existingWeight || !existingWeight.includes("-")) return "";
-  //   const [low, high] = existingWeight.split("-").map(Number);
-  //   return Math.round((high + low) / 2);
-  // });
   const [newHeight, setNewHeight] = useState("");
   const [newWeight, setNewWeight] = useState("");
   const [message, setMessage] = useState("");
 
-  //avg stats on mount
+  const [optimalBMI, setOptimalBMI] = useState(null);
+  const [currBMI, setCurrBMI] = useState(null);
+  const [optimalLife, setOptimalLife] = useState(null);
+  const [adjLocalLifespan, setAdjLocalLifespan] = useState(null);
+
+  // Load average stats from range
   useEffect(() => {
-    if (existingHeight) setNewHeight(getAvgFromRange(existingHeight));
-    if (existingWeight) setNewWeight(getAvgFromRange(existingWeight));
+    if (existingHeight) {
+      const avgHeight = getAvgFromRange(existingHeight);
+      setNewHeight(avgHeight);
+    }
+    if (existingWeight) {
+      const avgWeight = getAvgFromRange(existingWeight);
+      setNewWeight(avgWeight);
+    }
   }, [existingHeight, existingWeight]);
 
+  // calculate optimal BMI
+  useEffect(() => {
+    if (existingHeight && existingWeight) {
+      const avgHeight = getAvgFromRange(existingHeight);
+      const avgWeight = getAvgFromRange(existingWeight);
+      const bmi = calOptimalBMI(avgHeight, avgWeight);
+      setOptimalBMI(bmi);
+    }
+  }, [existingHeight, existingWeight]);
+
+  // calculate current BMI when user updates stats
+  useEffect(() => {
+    if (newHeight && newWeight) {
+      const bmi = calBMI(Number(newHeight), Number(newWeight));
+      setCurrBMI(bmi);
+    }
+  }, [newHeight, newWeight]);
+
+  // convert lifespan range to optimal lifespan (use highest)
+  useEffect(() => {
+    if (lifeSpanRange) {
+      if (lifeSpanRange.includes(" - ")) {
+        const [low, high] = lifeSpanRange.split(" - ").map((str) => parseFloat(str));
+        setOptimalLife(high);
+      } else {
+        setOptimalLife(parseFloat(lifeSpanRange));
+      }
+    }
+  }, [lifeSpanRange]);
+
+  // alculate adjusted lifespan
+  useEffect(() => {
+    if (optimalBMI && currBMI && optimalLife) {
+      const lifespan = calAdjLifespan(optimalBMI, currBMI, optimalLife);
+      setAdjLocalLifespan(lifespan); 
+      setAdjLifespan(lifespan);
+    }
+  }, [optimalBMI, currBMI, optimalLife]);
+
+  // save new stats
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await updateDogStats(airtableId, {
-        height: `${newHeight}`, //airtable accepts string only
+        height: `${newHeight}`,
         weight: `${newWeight}`,
       });
       const teamData = await getTeam();
@@ -58,26 +97,32 @@ const StatEditor = ({
   return (
     <div>
       <form className={styles.statContainer} onSubmit={handleSubmit}>
-        <div className={styles.inputWrapper}>
-          <label>Height:</label>
-          <input
-            className={styles.editInput}
-            type="text"
-            value={newHeight}
-            onChange={(event) => setNewHeight(event.target.value)}
-          ></input>
-          <div>cm</div>
-        </div>
-        <div className={styles.inputWrapper}>
-          <label>Weight:</label>
-          <input
-            className={styles.editInput}
-            type="text"
-            value={newWeight}
-            onChange={(event) => setNewWeight(event.target.value)}
-          ></input>
-          <div>kg</div>
-        </div>
+        <table>
+          <tbody className={styles.inputWrapper}>
+            <tr>
+              <th>Height:</th>
+              <td>
+                <input
+                  className={styles.editInput}
+                  type="text"
+                  value={newHeight}
+                  onChange={(event) => setNewHeight(event.target.value)}
+                ></input>
+                cm
+              </td>
+              <th>Weight:</th>
+              <td>
+                <input
+                  className={styles.editInput}
+                  type="text"
+                  value={newWeight}
+                  onChange={(event) => setNewWeight(event.target.value)}
+                ></input>
+                kg
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <div>
           <button className={styles.editBtn} type="submit">
             Save

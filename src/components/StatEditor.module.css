@@ -1,14 +1,31 @@
 .statContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
     align-items: baseline;
 }
 
-.inputWrapper {
+table{
+    margin: 0;
+}
+
+th,
+td {
+  font-size: 16px;
+  padding-bottom: 2px;
+}
+
+th {
+  width: 5rem;
+}
+td {
+  width: 12rem;
+}
+
+/* .inputWrapper {
     display: flex;
     gap:5px;
-}
+} */
 
 .editInput {
     width: 3rem;

@@ -7,6 +7,7 @@ import StatEditor from "./StatEditor";
 
 const TeamView = ({ team, setTeam }) => {
   const [error, setError] = useState(null);
+  const [adjustedLifespans, setAdjustedLifespans] = useState({});
 
   //get added team
   useEffect(() => {
@@ -49,8 +50,8 @@ const TeamView = ({ team, setTeam }) => {
               <img
                 src={breed.image_url}
                 alt={breed.name}
-                height="150"
-                width="200"
+                height="120"
+                width="140"
                 style={{
                   borderRadius: "20px",
                   objectFit: "cover",
@@ -63,11 +64,13 @@ const TeamView = ({ team, setTeam }) => {
                 <tbody>
                   <tr>
                     <th>Name: </th>
-                    <td>{breed.name}</td> <th>Bred for:</th>
+                    <td>{breed.name}</td>
+                    <th>Bred for:</th>
                     <td>{breed.bred_for || "Not available"}</td>
                   </tr>
                   <tr>
-                    <th>Lifespan:</th> <td>{breed.life_span}</td>
+                    <th>Lifespan:</th>
+                    <td>{adjustedLifespans[breed.airtableId]}</td>
                     <th className={styles.breedGroup}>Breed Group: </th>
                     <td>{breed.breed_group || "Not available"}</td>
                   </tr>
@@ -76,22 +79,28 @@ const TeamView = ({ team, setTeam }) => {
                     <td colSpan="3">{breed.origin || "Not available"}</td>
                   </tr>
                   <tr>
-                    <th>Temperament: </th>{" "}
+                    <th>Temperament: </th>
                     <td colSpan="3">{breed.temperament}</td>
                   </tr>
                 </tbody>
               </table>
+              <StatEditor
+                airtableId={breed.airtableId}
+                existingHeight={breed.height}
+                existingWeight={breed.weight}
+                lifeSpanRange={breed.life_span}
+                setTeam={setTeam}
+                setAdjLifespan={(lifespan) =>
+                  setAdjustedLifespans((prev) => ({
+                    ...prev,
+                    [breed.airtableId]: lifespan,
+                  }))
+                }
+              />
+              <button onClick={() => handleRemove(breed.airtableId)}>
+                Remove
+              </button>
             </section>
-            <StatEditor
-              airtableId={breed.airtableId}
-              existingHeight={breed.height}
-              existingWeight={breed.weight}
-              setTeam={setTeam}
-            />
-
-            <button onClick={() => handleRemove(breed.airtableId)}>
-              Remove
-            </button>
           </li>
         ))}
       </ul>
