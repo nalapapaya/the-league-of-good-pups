@@ -1,6 +1,7 @@
 //individual dog card for main page (prop from DogBreeds)
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./DogCard.module.css"
 
 const DogCard = (props) => {
   const nav = useNavigate();
@@ -10,7 +11,8 @@ const DogCard = (props) => {
   };
 
   return (
-    <div className="dog-card">
+    <div className={styles.dogCard}>
+      <div>
       {props.image?.url ? ( //checks if img exists before accessing url
         <img
           src={props.image.url}
@@ -23,7 +25,7 @@ const DogCard = (props) => {
         <div style={{ height: "150px", width: "200px", background: "#eee" }}>
           No Image
         </div>
-      )}
+      )}</div>
       <h3>{props.name}</h3>
       <div>Lifespan: {props.life_span}</div>
       <button onClick={handleViewDetails} style={{margin: "20px"}}>View Details</button>

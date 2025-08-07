@@ -47,28 +47,28 @@ const StatEditor = ({
   return (
     <div>
       <form className={styles.statContainer} onSubmit={handleSubmit}>
-        <table>
+        <table className={styles.stateTable}>
           <tbody className={styles.inputWrapper}>
-            <tr>
-              <th>Height:</th>
-              <td>
+            <tr className={styles.stateTr}>
+              <th className={styles.stateTh}>Height:</th>
+              <td className={styles.stateTd}>
                 <input
                   className={styles.editInput}
                   type="text"
                   value={newHeight}
                   onChange={(event) => setNewHeight(event.target.value)}
                 ></input>
-                cm
+                <span style={{ marginLeft: '4px' }}>cm</span>
               </td>
-              <th>Weight:</th>
-              <td>
+              <th className={styles.stateTh}>Weight:</th>
+              <td className={styles.stateTd}>
                 <input
                   className={styles.editInput}
                   type="text"
                   value={newWeight}
                   onChange={(event) => setNewWeight(event.target.value)}
                 ></input>
-                kg
+                <span style={{ marginLeft: '4px' }}>kg</span>
               </td>
             </tr>
           </tbody>

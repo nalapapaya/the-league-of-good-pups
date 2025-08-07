@@ -54,53 +54,68 @@ const DogDetail = ({ team, setTeam }) => {
 
   return (
     <>
-      <br />{" "}
+      <br />
       <Link className={styles.backBtn} to="/">
         Back
       </Link>
-      <div className={styles.detailContainer}>
-        <h2>{breed.name}</h2>
-        <img
-          src={`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`}
-          alt={breed.name}
-          style={{ maxWidth: "500px", borderRadius: "15px" }}
-        />
-        <table>
-          <tbody>
-            <tr>
-              <th>Bred for:</th>
-              <td>{breed.bred_for || "Not available"}</td>
-            </tr>
-            <tr>
-              <th>Breed Group:</th>
-              <td>{breed.breed_group || "Not available"}</td>
-            </tr>
-            <tr>
-              <th>Temperament:</th>
-              <td>{breed.temperament || "Not available"}</td>
-            </tr>
-            <tr>
-              <th>Origin:</th>
-              <td>{breed.origin || "Not available"}</td>
-            </tr>
-            <tr>
-              <th>Height:</th>
-              <td>{breed.height.metric} cm</td>
-            </tr>
-            <tr>
-              <th>Weight:</th>
-              <td>{breed.weight.metric} kg</td>
-            </tr>
-            <tr>
-              <th>Lifespan:</th>
-              <td>{breed.life_span}</td>
-            </tr>
-          </tbody>
-        </table>
-        {addMsg && <div>{addMsg}</div>}
-        <button className={styles.addToTeamBtn} onClick={handleAddToTeam}>
-          Add to Team
-        </button>
+      <div className={styles.detailPageCont}>
+        <div className={styles.detailContainer}>
+          <h2>{breed.name}</h2>
+          <img
+            src={`https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`}
+            alt={breed.name}
+            style={{ maxWidth: "500px", borderRadius: "15px" }}
+          />
+          <table className={styles.detailTable}>
+            <tbody>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Bred for:</th>
+                <td className={styles.detailTd}>
+                  {breed.bred_for || "Not available"}
+                </td>
+              </tr>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Breed Group:</th>
+                <td className={styles.detailTd}>
+                  {breed.breed_group || "Not available"}
+                </td>
+              </tr>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Temperament:</th>
+                <td className={styles.detailTd}>
+                  {breed.temperament || "Not available"}
+                </td>
+              </tr>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Origin:</th>
+                <td className={styles.detailTd}>
+                  {breed.origin || "Not available"}
+                </td>
+              </tr>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Height:</th>
+                <td className={styles.detailTd}>{breed.height.metric} cm</td>
+              </tr>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Weight:</th>
+                <td className={styles.detailTd}>{breed.weight.metric} kg</td>
+              </tr>
+              <tr className={styles.detailTr}>
+                <th className={styles.detailTh}>Lifespan:</th>
+                <td className={styles.detailTd}>{breed.life_span}</td>
+              </tr>
+            </tbody>
+          </table>
+          {/* reserving space for msg */}
+          <span className={styles.addMsg}>
+            <div style={{ visibility: addMsg ? "visible" : "hidden" }}> 
+              {addMsg || "placeholder"}
+            </div>
+          </span>
+          <button className={styles.addToTeamBtn} onClick={handleAddToTeam}>
+            Add to Team
+          </button>
+        </div>
       </div>
     </>
   );

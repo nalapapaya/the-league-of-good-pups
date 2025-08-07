@@ -7,7 +7,7 @@ const ViewTeamBtn = () => {
 
   return (
     <>
-      <button className="teamBtn" onClick={() => navigate("/team")}>View Team</button>
+      <button className={styles.teamBtn} onClick={() => navigate("/team")}>View Team</button>
     </>
   );
 };

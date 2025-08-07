@@ -4,6 +4,7 @@ import { getTeam, removeFromTeam } from "../api/airtable";
 import styles from "./TeamView.module.css";
 import { Link } from "react-router-dom";
 import StatEditor from "./StatEditor";
+import noPackImg from "../assets/noPack.png";
 
 const TeamView = ({ team, setTeam }) => {
   const [error, setError] = useState(null);
@@ -34,10 +35,10 @@ const TeamView = ({ team, setTeam }) => {
   };
 
   return (
-    <div className={styles.teamContainer}>
-      <Link className={styles.backToHomeBtn} to="/">
-        Back to Home
+    <><Link className={styles.backToHomeBtn} to="/">
+        Back
       </Link>
+    <div className={styles.teamContainer}>
       <h2>Dream Pack</h2>
       {error && <div>Error loading team: {error}</div>}
       <ul>
@@ -94,15 +95,23 @@ const TeamView = ({ team, setTeam }) => {
                   }))
                 }
               />
-              <button onClick={() => handleRemove(breed.airtableId)}>
+              <button className={styles.removeBtn} onClick={() => handleRemove(breed.airtableId)}>
                 Remove
               </button>
             </section>
           </li>
         ))}
       </ul>
-      {team.length === 0 && <div>No members yet</div>}
+      <span className={styles.noPack}>
+        {team.length === 0 && (
+          <div>
+            No pups in the pack yet! Go fetch some friends!
+            <img src={noPackImg} alt="No pack yet!" />
+          </div>
+        )}
+      </span>
     </div>
+    </>
   );
 };
 

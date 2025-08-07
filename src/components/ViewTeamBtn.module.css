@@ -1,6 +1,8 @@
 .teamBtn {
-height: 2rem;
+height: 3rem;
 width: 10rem;
-font-size: 20px;
+font-size: 25px;
 border-radius: 10px;
+  box-shadow: 0 4px rgb(103, 103, 103);
+  background-color: rgb(253, 231, 192);
 }

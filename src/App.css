@@ -1,13 +1,17 @@
 body {
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Patrick Hand", cursive;
+  background-image: url("./assets/dogBackground.png");
+  background-repeat: repeat;
 }
+
 
 button {
   height: 2rem;
   width: 10rem;
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 8px;
+    font-family: "Patrick Hand", cursive;
 }
 
 .homePage {
@@ -16,7 +20,13 @@ button {
   color: black;
   box-shadow: none;
   font-size: 6rem;
-  margin-left: 300px;
+  margin-left: 22rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .container {
