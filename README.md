@@ -64,11 +64,11 @@ Want to experiment? Try editing a dog’s height and weight and watch the stats 
 
 ## Environment Variables
 
-VITE_AIRTABLE_TEAM_URL=your_airtable_url
-VITE_AIRTABLE_API_KEY=your_airtable_key
-VITE_SERVER_DOGFACTS=your_dogfacts_url
-VITE_SERVER_DOGBREED=your_dogdataapi_url
-VITE_DOGBREED_API_KEY=your_dogdataapi_key
+- VITE_AIRTABLE_TEAM_URL=your_airtable_url
+- VITE_AIRTABLE_API_KEY=your_airtable_key
+- VITE_SERVER_DOGFACTS=your_dogfacts_url
+- VITE_SERVER_DOGBREED=your_dogdataapi_url
+- VITE_DOGBREED_API_KEY=your_dogdataapi_key
 
 ## ⚠️ Disclaimer
 
